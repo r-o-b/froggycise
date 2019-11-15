@@ -1,0 +1,113 @@
+﻿<!-- layout is:
+-----------------------------
+
+Main/game area - #gameArea - 80%
+
+- - - - - - - - -
+Footer/settings - #controls - 20%
+-----------------------------
+-->
+
+    <div id="gameArea">
+
+        <div class="animalDisplay" id="0">
+            <img id="animalImg" ng-src="images/{{currentAnimal.image}}" alt={{currentAnimal.name}} ng-class="{fadeOut: inTransition}">
+        </div>
+        
+        <div class="equals" ng-class="{visHidden: (answers[currentAnimal.name] && inTransition != 'fromNew')}">
+            <img src="images/Equal.svg" alt="equals">
+        </div>
+        
+        <div class="btn-group-vertical btn-group-lg" ng-show="!answers[currentAnimal.name] || inTransition == 'fromNew';">
+            <button id="action{{$index}}" ng-repeat="action in actions" ng-click="next($event)" type="button" class="btn btn-primary" ng-model="radioModel" value="{{action}}" ng-show="action" ng-disabled="actSelected">
+                {{action}}
+            </button>
+        </div>
+            
+        <div class="btn-group-vertical btn-group-lg" ng-show="answers[currentAnimal.name] && !actSelected"><!--if instead of show so autofocus works-->
+            <button id="nextButton" ng-click="next()" type="button" class="btn btn-primary" ng-show="!autoplay" ng-disabled="inTransition == 'fromRepeat'" autofocus>
+                Next
+            </button>
+            
+            <button id="playButton" ng-click="play()" type="button" class="btn btn-primary" ng-show="!autoplay" ng-disabled="inTransition == 'fromRepeat'">
+                Play
+            </button>
+            
+            <button id="pauseButton" ng-click="pause()" type="button" class="btn btn-primary" ng-show="autoplay" ng-disabled="inTransition == 'fromRepeat'">
+                Pause
+            </button>
+            
+            <button ng-click="check()" type="button" class="btn btn-primary" ng-disabled="checkingAnswer || inTransition == 'fromRepeat'">
+                Check
+            </button>
+        </div>
+        
+        <div id="checkAnswer" ng-show="checkingAnswer" class="h3">
+            {{answers[currentAnimal.name]}}
+        </div>
+        
+    </div><!-- #gameArea -->
+    
+    
+    <div id="controls" ng-class="{grass: addGrassCss}">
+        <div id="controlButtons">
+            <a href="#0"><button type="button" class="btn btn-info" ng-click="reset()">
+                New Game
+            </button></a>
+            <a href="#settings"><button type="button" class="btn btn-info" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                Settings
+            </button></a>
+            <a href="#recap"><button type="button" class="btn btn-info" ng-model="recapToggle" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-disabled="!turns[0]">
+                Recap
+            </button></a>
+        </div>
+        
+        <div id="settings" class="panel panel-primary" ng-show="settingsToggle">
+            <div class="panel-heading">
+                <h2 class="panel-title">Settings</h2>
+            </div>
+            <div class="panel-body">
+                <label for="playSpeed" id="playSpeedLabel">Play speed:</label> 
+                <div id="playSpeed" class="btn-group" role="group" aria-labelledby="playSpeedLabel">
+                    <button type="button" class="btn btn-primary" ng-model="radioModelSpeed" btn-radio="'1500'">Fast</button>
+                    <button type="button" class="btn btn-primary" ng-model="radioModelSpeed" btn-radio="'2250'">Medium</button>
+                    <button type="button" class="btn btn-primary" ng-model="radioModelSpeed" btn-radio="'3000'">Slow</button>
+                </div>
+                <br>
+                <label for="numActions">Actions choices for each animal:</label>
+                <input ng-model="settings.numActions" id="numActions" type="range" min="2" max="6" step=1 list="numActionsList" ng-change="numActionsChanged()">
+                <output for="numActions">{{settings.numActions}}</output>
+                <datalist id="numActionsList">
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <!-- limiting to 6 for now 
+                    <option>7</option>
+                    <option>8</option>
+                    -->
+                </datalist>
+            </div>
+        </div><!-- #settings -->
+        
+        <div id="recap" class="panel panel-info" ng-show="recapToggle">
+            <div class="panel-heading">
+                <h2 class="panel-title">Recap</h2>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="turn in turns track by $index" class="recapList">
+                        <strong>{{$index+1}}</strong>
+                        <img ng-src="images/{{turn.image}}" alt={{turn.animal}} class="recapImg">
+                        <span ng-show="turn.action"> = {{turn.action}}</span>
+                    </li>
+                </ul>
+                Animals without actions yet:
+                <span ng-repeat="animal in animals" class="recapList">
+                    <img ng-src="images/{{animal.image}}" alt={{animal.name}} class="recapImg" ng-show="!answers[animal.name]">
+                </span>
+            </div>
+        </div><!-- #recap -->
+        
+    </div><!-- #controls -->

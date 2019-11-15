@@ -1,0 +1,24 @@
+﻿    <div id="introArea">
+    
+        <div class="howToPlay"">
+            <h2 class="h3">How to Play</h2>
+            <ol>
+                <li>Players take turns</li>
+                <li>When an animal comes up for the first time, the player picks the action to go with it</li>
+                <li>When the animal comes up after that, the players must remember which action to do</li>
+                <li>Players are out when they do the wrong action</li>
+                <li>The last player standing (or hopping or spinning or stretching!) wins the game</li>
+            </ol>
+            <a href="/play/"><button type="button" class="btn btn-primary" ng-click="start()" autofocus>
+                Let's go!
+            </button></a>
+        </div>
+        
+        <div class="animalDisplay">
+            <img id="animalImg" ng-src="images/{{currentAnimal.image}}" alt={{currentAnimal.name}}>
+        </div>
+
+        <br>
+        <img class="imgPreload" ng-repeat="animal in animals" ng-src="images/{{animal.image}}" ng-show="true" alt="">
+        
+    </div><!-- #introArea -->

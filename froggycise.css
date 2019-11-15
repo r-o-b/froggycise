@@ -1,0 +1,250 @@
+﻿
+html {
+    /* I want border-box to be inherited by every relevant element on page; I think bootstrap is doing this too (using * selector)  */
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    height: 100%;
+    max-width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: rgb(70, 68, 66); /* beige */
+}
+body {
+    /* +2 center page; could use bootstrap & wrap whole page in div with class=container instead */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px 0px 0px 0px;
+    position:relative;
+    height: 100%;
+    margin: 0;
+}
+#header {
+    height:20%;
+    /* +2 override bootstrap for h1, h2, h3 */
+    margin-top:0px;
+    margin-bottom:0px;
+    display:table;
+    width: 100%;
+    padding-left: 3%;
+    
+    /* +2 testing working around for transition multiple background-images */
+    background-image: url('images/cloud.svg'), url('images/cloud.svg'), url('images/cloud.svg');
+    background-size: 0% 0%, 0% 0%, 0% 0%;
+}
+
+@media all and (orientation: landscape) {
+    #header.headerClouds {  
+        background-image: url('images/cloud.svg'), url('images/cloud.svg'), url('images/cloud.svg');
+        background-repeat: no-repeat, no-repeat, no-repeat;
+        background-size: auto 40%, auto 70%, auto 55%;
+        /* background-position-x: 30%, 55%, 90%;
+        background-position-y: 50%, 5%, 35%; */
+        background-position: 30% 50%, 55% 5%, 90% 35%;
+        padding-left: .5%; /* so text inside are closer to left edge */
+        transition: all .7s ease; /* not until there's a (good) way to do all 3 clouds */
+    }
+}
+
+/* just because less clouds fit */
+@media all and (orientation: portrait) {
+    #header.headerClouds {  
+        background-image: url('images/cloud.svg');
+        background-repeat: no-repeat;
+        background-size: auto 55%;
+        /* for Firefox, must set together
+        background-position-x: 90%;
+        background-position-y: 35%; */
+        background-position: 90% 35%;
+        padding-left: .5%; /* so text inside are closer to left edge */
+        transition: all .7s ease;
+    }
+}
+
+#header a {
+    text-decoration: none;
+    color:#08589C;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#header a.headerClouds {    
+    /* +4 test sun affect */
+    vertical-align: top;
+    text-shadow: -2px -2px 0px yellow, .1em .1em .1em rgba(207, 245, 10, 1), .4em .5em .5em rgba(245, 245, 10, 0.9), .7em 1em 1em rgba(217, 245, 25, 1);
+    font-weight: 100;
+    transition: all 1s ease;
+    /* text-shadow: 3px 3px 1px rgba(253, 253, 35, 1); */
+}
+
+#views {
+    height:80%;
+}
+
+#controls {
+    height:20%;
+    margin-top:0px;
+    margin-bottom:0px;
+    /* +1 so .grass transition looks good */
+    background-size: auto 5%;
+    background-position:left bottom;
+}
+
+/* using #controls in front of .grass so it's more important than the pre-grass stuff in #controls */
+#controls.grass {
+    transition: all .5s ease;
+    background-image: url('images/grass.svg');
+    background-size: auto 120%;
+    background-repeat:repeat-x;
+    background-position:center center;
+}
+
+/* this element and its styling exist just so buttons can be vertically centered */
+#controlButtons {
+    display:table;
+    height:100%;
+    margin-left: 3%;
+}
+
+#controlButtons a {
+    display:table-cell;
+    vertical-align: middle;
+}
+
+/* #controlButtons button {
+    display:table-cell;
+    vertical-align: middle;
+} */
+
+#gameArea div{
+    vertical-align: middle;
+}
+
+#gameArea{
+    height:80%;
+    text-align: center;
+}
+
+#introArea div{
+    vertical-align: middle;
+}
+
+#introArea{
+    height:80%;
+    margin-left: 3%;
+}
+
+@media all and (orientation: portrait) {
+    #introArea .animalDisplay {
+        width:35%; /* for vertical orientation */
+    }
+}
+
+@media all and (orientation: landscape) {
+    #introArea .animalDisplay {
+        width:35%;
+        height:60%;
+    }
+}
+
+.imgPreload {
+    height:5%;
+}
+
+.visHidden {
+    visibility:hidden;
+}
+
+.animalDisplay {
+    display:inline-block;
+    text-align: right;
+}
+
+@media all and (orientation: landscape) {
+    .animalDisplay {
+        height:100%;
+        width:auto;
+    }
+}
+
+@media all and (orientation: portrait) {
+    .animalDisplay {
+        height:auto;
+        width:50%; /* goes with #animalImg max-width:100% for vertical orientation */
+    }
+}
+
+.howToPlay {
+    display:inline-block;
+}
+
+@media all and (orientation: portrait) {
+    .howToPlay {
+        width:60%; /* for vertical orientation */
+    }
+}
+
+@media all and (orientation: landscape) {
+    .howToPlay {
+        width:60%;
+    }
+}
+
+.actionButtons {
+    display:inline-block;
+}
+
+.equals {
+    display:inline-block;
+    margin-right:25px;
+    margin-left:25px;
+}
+
+#checkAnswer {
+    display:inline-block;
+    margin-left:25px;
+}
+
+#animalImg {
+    transition: none; /* so there's no fading back in */
+}
+
+@media all and (orientation: landscape) {
+    #animalImg {
+        width:auto;
+        height:100%;
+    }
+}
+
+@media all and (orientation: portrait) {
+    #animalImg {
+        width:100%; /* goes with .animalDisplay max-width:50% for vertical orientation */
+        height:auto;
+    }
+}
+
+#animalImg.fadeOut {
+    opacity:0;
+    transition: all 0.5s ease;
+}
+
+#recap, #settings {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.recapList {
+    list-style-type: none;
+}
+
+.recapImg {
+    height: 20px;
+}
+
+/*    below is from other project */
+
+/* overrides bootstrap */
+input.setting {
+    margin-left:30px;
+}
