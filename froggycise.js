@@ -2,7 +2,11 @@
 var app = angular.module('froggyApp', ['ui.bootstrap', 'ngRoute']);
 
 app.config(function($locationProvider, $routeProvider, $logProvider) {
-    $locationProvider.html5Mode(true);
+    
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
     
     $logProvider.debugEnabled(false);
     
