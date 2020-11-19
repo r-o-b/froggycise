@@ -11,23 +11,23 @@ app.config(function($locationProvider, $routeProvider, $logProvider) {
     $logProvider.debugEnabled(false);
     
     $routeProvider
-        .when('/froggycise',
+        .when('/',
             {
                 controller: 'MainController',
-                templateUrl: '/froggycise/homeView.htm'
+                templateUrl: 'homeView.htm'
             })
-        .when('/froggycise/index.htm',
+        .when('/index.htm',
             {
                 controller: 'MainController',
-                templateUrl: '/froggycise/homeView.htm'
+                templateUrl: 'homeView.htm'
             })
-        .when('/froggycise/play',
+        .when('/play',
             {
                 controller: 'MainController',
-                templateUrl: '/froggycise/playView.htm',
+                templateUrl: 'playView.htm',
                 reloadOnSearch: false
             })
-        .otherwise({ redirectTo: '/froggycise' });
+        .otherwise({ redirectTo: '/' });
         
 });
 
