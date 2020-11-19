@@ -14,17 +14,17 @@ app.config(function($locationProvider, $routeProvider, $logProvider) {
         .when('/froggycise',
             {
                 controller: 'MainController',
-                templateUrl: 'homeView.htm'
+                templateUrl: '/froggycise/homeView.htm'
             })
         .when('/froggycise/index.htm',
             {
                 controller: 'MainController',
-                templateUrl: 'homeView.htm'
+                templateUrl: '/froggycise/homeView.htm'
             })
         .when('/froggycise/play',
             {
                 controller: 'MainController',
-                templateUrl: 'playView.htm',
+                templateUrl: '/froggycise/playView.htm',
                 reloadOnSearch: false
             })
         .otherwise({ redirectTo: '/froggycise' });
